@@ -11,11 +11,10 @@ export default function RestaurantDetailScreen ({ route }) {
   const [restaurant, setRestaurant] = useState({})
 
   useEffect(() => {
-    console.log('Loading restaurant details, please wait 1 second')
-    setTimeout(() => {
-      setRestaurant(getDetail(route.params.id))
-      console.log('Restaurant details loaded')
-    }, 1000)
+    async function fetchRestaurantDetails (id) {
+      setRestaurant(await getDetail(id))
+    }
+    fetchRestaurantDetails(route.params.id)
   }, [])
 
   const renderHeader = () => {
@@ -95,5 +94,5 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     marginRight: 5,
     color: GlobalStyles.brandSecondary
-  },
+  }
 })
